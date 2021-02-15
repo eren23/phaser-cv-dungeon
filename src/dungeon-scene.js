@@ -32,12 +32,12 @@ export default class DungeonScene extends Phaser.Scene {
     //  - Doors should be at least 2 tiles away from corners, so that we can place a corner tile on
     //    either side of the door location
     this.dungeon = new Dungeon({
-      width: 50,
-      height: 50,
+      width: 30,
+      height: 30,
       doorPadding: 2,
       rooms: {
-        width: { min: 7, max: 15, onlyOdd: true },
-        height: { min: 7, max: 15, onlyOdd: true },
+        width: { min: 8, max: 10, onlyOdd: true },
+        height: { min: 8, max: 10, onlyOdd: true },
       },
     });
 
@@ -174,6 +174,17 @@ export default class DungeonScene extends Phaser.Scene {
         backgroundColor: "#ffffff",
       })
       .setScrollFactor(0);
+    if (this.level === 1) {
+      this.text1 = this.add.text(900, 675, "Text1").setScrollFactor(0);
+    } else if (this.level === 2) {
+      this.text2 = this.add.text(900, 675, "Text2").setScrollFactor(0);
+    } else if (this.level === 3) {
+      this.text3 = this.add.text(900, 675, "Text3").setScrollFactor(0);
+    } else if (this.level === 4) {
+      this.text4 = this.add.text(900, 675, "Text4").setScrollFactor(0);
+    } else if (this.level >= 5) {
+      this.textFinal = this.add.text(900, 675, "This is the last text, you can keep playing").setScrollFactor(0);
+    }
   }
 
   update(time, delta) {
