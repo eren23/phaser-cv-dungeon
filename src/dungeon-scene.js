@@ -185,6 +185,7 @@ export default class DungeonScene extends Phaser.Scene {
     } else if (this.level >= 5) {
       this.textFinal = this.add.text(900, 675, "This is the last text, you can keep playing").setScrollFactor(0);
     }
+    // this.scene.start("MenuScene");
   }
 
   update(time, delta) {
