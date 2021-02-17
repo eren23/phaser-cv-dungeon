@@ -35,7 +35,6 @@ const SHARED_CONFIG = {
     x: WIDTH / ZOOM_FACTOR + (WIDTH - WIDTH / ZOOM_FACTOR) / 2,
     y: HEIGHT / ZOOM_FACTOR + (HEIGHT - HEIGHT / ZOOM_FACTOR) / 2,
   },
-  lastLevel: 2,
 };
 
 const Scenes = [PreloadScene, MenuScene, DungeonScene];
@@ -45,18 +44,16 @@ const initScenes = () => Scenes.map(createScene);
 
 const config = {
   type: Phaser.AUTO,
-  width: 1000,
-  height: 750,
-  backgroundColor: "#000",
-  parent: "game-container",
+  ...SHARED_CONFIG,
   pixelArt: true,
-  scene: initScenes(),
+  parent: "game-container",
   physics: {
     default: "arcade",
     arcade: {
-      gravity: { y: 0 },
+      debug: SHARED_CONFIG.debug,
     },
   },
+  scene: initScenes(),
 };
 
 const game = new Phaser.Game(config);

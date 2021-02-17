@@ -3,13 +3,16 @@ import TILES from "./tile-mapping.js";
 import TilemapVisibility from "./tilemap-visibility.js";
 import Phaser from "Phaser";
 import Dungeon from "@mikewesthad/dungeon";
+import BaseScene from "./scenes/BaseScene.js";
 
 /**
  * Scene that generates a new dungeon
  */
-export default class DungeonScene extends Phaser.Scene {
-  constructor() {
-    super();
+export default class DungeonScene extends BaseScene {
+  constructor(config) {
+    super("DungeonScene", config);
+
+    this.config = config;
     this.level = 0;
   }
 
@@ -175,7 +178,9 @@ export default class DungeonScene extends Phaser.Scene {
       })
       .setScrollFactor(0);
     if (this.level === 1) {
-      this.text1 = this.add.text(900, 675, "Text1").setScrollFactor(0);
+      this.text1 = this.add
+        .text(this.scene.config.leftTopCorner.x + 300, this.scene.config.leftTopCorner.x + 300, "Text1")
+        .setScrollFactor(0);
     } else if (this.level === 2) {
       this.text2 = this.add.text(900, 675, "Text2").setScrollFactor(0);
     } else if (this.level === 3) {

@@ -7,6 +7,7 @@ class PreloadScene extends Phaser.Scene {
 
   preload() {
     this.load.image("menu-bg", "../../assets/background01.png");
+    this.load.image("back", "../../assets/back.png");
   }
 
   // create() {
