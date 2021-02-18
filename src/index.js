@@ -7,9 +7,9 @@
  *      https://opengameart.org/content/a-platformer-in-the-forest
  */
 
-import MenuScene from "./scenes/MenuScene";
+// import MenuScene from "./scenes/MenuScene";
 import DungeonScene from "./dungeon-scene.js";
-import PreloadScene from "./scenes/PreloadScene";
+// import PreloadScene from "./scenes/PreloadScene";
 
 const MAP_WIDTH = 1600;
 
@@ -37,7 +37,7 @@ const SHARED_CONFIG = {
   },
 };
 
-const Scenes = [PreloadScene, MenuScene, DungeonScene];
+const Scenes = [DungeonScene];
 const createScene = (Scene) => new Scene(SHARED_CONFIG);
 
 const initScenes = () => Scenes.map(createScene);

@@ -1,18 +1,18 @@
-import Phaser from "phaser";
+// import Phaser from "phaser";
 
-class PreloadScene extends Phaser.Scene {
-  constructor() {
-    super("PreloadScene");
-  }
+// class PreloadScene extends Phaser.Scene {
+//   constructor() {
+//     super("PreloadScene");
+//   }
 
-  preload() {
-    this.load.image("menu-bg", "../../assets/background01.png");
-    this.load.image("back", "../../assets/back.png");
-  }
+//   preload() {
+//     // this.load.image("menu-bg", "../../assets/background01.png");
+//     // this.load.image("back", "../../assets/back.png");
+//   }
 
-  // create() {
-  //   this.scene.start("PlayScene");
-  // }
-}
+//   // create() {
+//   //   this.scene.start("PlayScene");
+//   // }
+// }
 
-export default PreloadScene;
+// export default PreloadScene;

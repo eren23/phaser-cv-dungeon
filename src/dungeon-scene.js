@@ -3,16 +3,16 @@ import TILES from "./tile-mapping.js";
 import TilemapVisibility from "./tilemap-visibility.js";
 import Phaser from "Phaser";
 import Dungeon from "@mikewesthad/dungeon";
-import BaseScene from "./scenes/BaseScene.js";
+// import BaseScene from "./scenes/BaseScene.js";
 
 /**
  * Scene that generates a new dungeon
  */
-export default class DungeonScene extends BaseScene {
+export default class DungeonScene extends Phaser.Scene {
   constructor(config) {
     super("DungeonScene", config);
-
     this.config = config;
+
     this.level = 0;
   }
 
@@ -177,20 +177,102 @@ export default class DungeonScene extends BaseScene {
         backgroundColor: "#ffffff",
       })
       .setScrollFactor(0);
+
     if (this.level === 1) {
       this.text1 = this.add
-        .text(this.scene.config.leftTopCorner.x + 300, this.scene.config.leftTopCorner.x + 300, "Text1")
+        .text(
+          this.config.width / 2,
+          this.config.height / 2,
+          "Text1 Text1 Text1 Text1 \nText1 Text1 Text1 Text1 \n Text1 Text1 Text1 Text1",
+          {
+            font: "18px monospace",
+            fill: "#000000",
+            padding: { x: 10, y: 5 },
+            backgroundColor: "#ffffff",
+          }
+        )
+        .setOrigin(0.5, 0.5)
         .setScrollFactor(0);
+
+      this.text1.setInteractive();
+      this.input.on("gameobjectdown", this.onClicked.bind(this));
     } else if (this.level === 2) {
-      this.text2 = this.add.text(900, 675, "Text2").setScrollFactor(0);
+      this.text1 = this.add
+        .text(
+          this.config.width / 2,
+          this.config.height / 2,
+          "Text2 Text2 Text2 Text2 \nText2 Text2 Text2 Text2 \n Text2 Text2 Text2 Text2",
+          {
+            font: "18px monospace",
+            fill: "#000000",
+            padding: { x: 10, y: 5 },
+            backgroundColor: "#ffffff",
+          }
+        )
+        .setOrigin(0.5, 0.5)
+        .setScrollFactor(0);
+
+      this.text1.setInteractive();
+      this.input.on("gameobjectdown", this.onClicked.bind(this));
     } else if (this.level === 3) {
-      this.text3 = this.add.text(900, 675, "Text3").setScrollFactor(0);
+      this.text1 = this.add
+        .text(
+          this.config.width / 2,
+          this.config.height / 2,
+          "Text3 Text3 Text3 Text3 \nText3 Text3 Text3 Text3 \n Text3 Text3 Text3 Text3",
+          {
+            font: "18px monospace",
+            fill: "#000000",
+            padding: { x: 10, y: 5 },
+            backgroundColor: "#ffffff",
+          }
+        )
+        .setOrigin(0.5, 0.5)
+        .setScrollFactor(0);
+
+      this.text1.setInteractive();
+      this.input.on("gameobjectdown", this.onClicked.bind(this));
     } else if (this.level === 4) {
-      this.text4 = this.add.text(900, 675, "Text4").setScrollFactor(0);
+      this.text1 = this.add
+        .text(
+          this.config.width / 2,
+          this.config.height / 2,
+          "Text4 Text4 Text4 Text4 \nText4 Text4 Text4 Text4 \n Text4 Text4 Text4 Text4",
+          {
+            font: "18px monospace",
+            fill: "#000000",
+            padding: { x: 10, y: 5 },
+            backgroundColor: "#ffffff",
+          }
+        )
+        .setOrigin(0.5, 0.5)
+        .setScrollFactor(0);
+
+      this.text1.setInteractive();
+      this.input.on("gameobjectdown", this.onClicked.bind(this));
     } else if (this.level >= 5) {
-      this.textFinal = this.add.text(900, 675, "This is the last text, you can keep playing").setScrollFactor(0);
+      this.text1 = this.add
+        .text(
+          this.config.width / 2,
+          this.config.height / 2,
+          "Text5 Text5 Text5 Text5 \nText5 Text5 Text5 Text5 \n Text5 Text5 Text5 Text5",
+          {
+            font: "18px monospace",
+            fill: "#000000",
+            padding: { x: 10, y: 5 },
+            backgroundColor: "#ffffff",
+          }
+        )
+        .setOrigin(0.5, 0.5)
+        .setScrollFactor(0);
+
+      this.text1.setInteractive();
+      this.input.on("gameobjectdown", this.onClicked.bind(this));
     }
     // this.scene.start("MenuScene");
+  }
+  onClicked(pointer, objectClicked) {
+    objectClicked.destroy();
   }
 
   update(time, delta) {
