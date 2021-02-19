@@ -12,6 +12,7 @@ export default class DungeonScene extends Phaser.Scene {
   constructor(config) {
     super("DungeonScene", config);
     this.config = config;
+    this.assignedAlpha = 0.5;
 
     this.level = 0;
   }
@@ -179,11 +180,20 @@ export default class DungeonScene extends Phaser.Scene {
       .setScrollFactor(0);
 
     if (this.level === 1) {
+      this.myRect1 = this.rounded(
+        this.config.width / 7,
+        this.config.height / 6,
+        400,
+        200,
+        20,
+        0xffffff
+      ).setScrollFactor(0);
+
       this.text1 = this.add
         .text(
           this.config.width / 2,
           this.config.height / 2,
-          "Text1 Text1 Text1 Text1 \nText1 Text1 Text1 Text1 \n Text1 Text1 Text1 Text1",
+          "Text1 Text1 Text1 Text1 \nText1 Text1 Text1 Text1 \n Text1 Text1 Text1 Text1 \n Text1 Text1 Text1 Text1",
           {
             font: "18px monospace",
             fill: "#000000",
@@ -194,7 +204,11 @@ export default class DungeonScene extends Phaser.Scene {
         .setOrigin(0.5, 0.5)
         .setScrollFactor(0);
 
+      // this.myRect1.setInteractive();
+      this.myRect1.setInteractive();
+
       this.text1.setInteractive();
+      this.myRect1.on("onclick", this.onGraphicDestroy.bind(this));
       this.input.on("gameobjectdown", this.onClicked.bind(this));
     } else if (this.level === 2) {
       this.text1 = this.add
@@ -269,9 +283,53 @@ export default class DungeonScene extends Phaser.Scene {
       this.text1.setInteractive();
       this.input.on("gameobjectdown", this.onClicked.bind(this));
     }
+
     // this.scene.start("MenuScene");
   }
+
+  rounded(x, y, width, height, radius, color) {
+    if (+width < radius * 2 || +height < radius * 2)
+      return this.add.graphics({ fillStyle: { color: color, alpha: this.assignedAlpha }, x: +x, y: +y });
+    let options = Array.from({ length: 4 }, (_, index) => ({
+      radians: ((index * Math.PI) / 2 + Math.PI) % (2 * Math.PI),
+      x: +x + (((index + 1) & 2) >> 1) * +width,
+      y: +y + ~~(index > 1) * +height,
+      lx: radius * ~~((index - 2) * ((index - 2) & 1)),
+      ly: radius * ~~-((index + 1) & 1),
+      ax: radius * (~((index + 1) & 2) + 2),
+      ay: radius * (~~(index < 2) || -1),
+    }));
+
+    let shape = this.add
+      .graphics({ fillStyle: { color: color, alpha: this.assignedAlpha }, x: +x, y: +y })
+      .beginPath()
+      .moveTo(+x, (+y + height) >> 1);
+
+    options.forEach((current, index, arr) => {
+      shape
+        .lineTo(current.x + current.lx, current.y + current.ly)
+        .arc(
+          current.x + current.ax,
+          current.y + current.ay,
+          +radius,
+          current.radians,
+          arr[index < arr.length - 1 ? index + 1 : 0].radians
+        );
+    });
+
+    shape.setInteractive();
+    shape.on("onclick", () => {
+      console.log("wtf");
+    });
+
+    return shape.closePath().fillPath();
+  }
+
   onClicked(pointer, objectClicked) {
+    objectClicked.destroy();
+  }
+
+  onGraphicDestroy(pointer, objectClicked) {
     objectClicked.destroy();
   }
 
